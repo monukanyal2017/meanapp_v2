@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+ 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+     <h2><%- message %> User</h2>
+    </div>
+    <div class="col-sm-4">
+     <div id="circle"></div>
+    </div>
+    <div class="col-sm-4">
+     
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $("document").ready(function(){
+		 var morr=Morris.Donut({
+		  element: 'circle',
+		  data: [
+		    {label: "probe", value: 12,labelColor:'#000000'},
+		  
+		  ]
+		});
+
+		var pageURL = document.location.origin;
+
+	 		var socket = io.connect(pageURL);
+	  		setInterval(function(){ 
+			    socket.emit('req_fetchinfo');
+			}, 3000);
+
+	   		 socket.on('get_fetchinfo',function(value,color){
+	   		 	//console.log(color);
+			    morr.setData( [{ label: "probe", value: value,labelColor: color } ]);
+			
+			});
+
+});
+</script>
+</body>
+</html>
