@@ -1,0 +1,82 @@
+.custom_overview{
+    background-color: #222;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.custom_overview p{
+    margin-bottom: 0px;
+    margin-top: 5px;
+    color: #868383;
+}
+.custom_overview h2{
+    margin-top: 0px;
+}
+
+.colr_brand{
+    color: #fff !important;
+}
+
+.custom_bg{
+    margin:0px;
+    border: none;
+    background-color: #000;
+}
+.dropbtn {
+background-color: #022A4B;
+color: white;
+padding: 10px;
+font-size: 16px;
+border: none;
+cursor: pointer;
+margin-top: 4px;
+}
+.custom_text a{
+margin-top: 11px;
+margin-right: 5px;
+padding: 4px !important;
+color: #000 !important;
+background-color: #fff !important;
+border-radius: 4px;
+}
+.custom{
+    text-align: center
+}
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 116px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+
+
+.show {display:block;}
+
+
+.full-circle {
+    background-color:#c06;
+    height:150px;
+    width:150px;
+    -webkit-border-radius:75px;
+    -moz-border-radius:75px;
+    margin: 0 auto;
+}
