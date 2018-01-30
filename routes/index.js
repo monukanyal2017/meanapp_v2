@@ -70,6 +70,9 @@ router.post('/apilogin',function(req,res){
     
 });
 
+router.get('/privacy',function(req,res){
+   res.render('privacy');
+});
 
 
 module.exports = router;
