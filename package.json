@@ -1,12 +1,8 @@
 {
-  "name": "Monuapp",
+  "name": "passpo_v2",
   "version": "1.0.0",
-  "description": "passport js NodeJS Regular WebApp",
-  "author": "monukanyal",
-  "license": "MIT",
-  "scripts": {
-    "start": "node app.js"
-  },
+  "description": "its sociallogin app",
+  "main": "Procfile.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.1",
@@ -36,7 +32,21 @@
     "serve-favicon": "^2.4.0",
     "socket.io": "^2.0.4"
   },
-  "engines": {
-    "node": "^6.0.0"
-  }
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monukanyal/passpo_v2.git"
+  },
+  "keywords": [
+    "passport"
+  ],
+  "author": "monu kanyal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monukanyal/passpo_v2/issues"
+  },
+  "homepage": "https://github.com/monukanyal/passpo_v2#readme"
 }
