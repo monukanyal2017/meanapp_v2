@@ -2,7 +2,7 @@ const express = require('express');
 var app = express();
 const path = require('path');
 const md5=require('md5');
-var morgan = require('morgan'); //http request logger
+//var morgan = require('morgan'); //http request logger
 const flash = require('connect-flash');
 var mongoose=require('mongoose');
 
@@ -164,7 +164,7 @@ app.use(passport.session());
 app.use(flash());
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+//app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 /*------routes Define---------------------*/
 const routes = require('./routes/index');
