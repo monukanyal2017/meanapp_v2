@@ -136,7 +136,8 @@ FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new FacebookStrategy({
     clientID: "1577219845726179",
     clientSecret: "e85a6c092d15cfb3249d1a8945411006",
-    callbackURL: "https://young-lowlands-73461.herokuapp.com/auth/facebook/callback"
+    callbackURL: "https://young-lowlands-73461.herokuapp.com/auth/facebook/callback",
+     profileFields: ['id', 'emails', 'name']
   },
   function(accessToken, refreshToken, profile, done) {
    
