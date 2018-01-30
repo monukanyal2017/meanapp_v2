@@ -140,13 +140,13 @@ passport.use(new FacebookStrategy({
     profileFields: ['id', 'emails', 'name']
   },
   function(accessToken, refreshToken, profile, done) {
-   
+
        var query=User.findOne({ email:profile.emails[0].value });
      query.exec().then((userdata)=>{
       if (!userdata) {
           var newUser=new User();
-          newUser.Name=profile.displayName;
-          newUser.email=profile.name.givenName;
+          newUser.Name=profile.name.givenName;
+          newUser.email=profile.emails[0].value;
           newUser.password='';
           newUser.logintype='fb';
           newUser.save().then((results)=>{
@@ -165,7 +165,7 @@ passport.use(new FacebookStrategy({
   });
 
 
-      
+
   }
 ));
 
