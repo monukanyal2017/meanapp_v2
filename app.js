@@ -156,7 +156,7 @@ app.use(
     secret: 'shhhhhhhhh',
     resave: true,
     saveUninitialized: true,
-    store: new MongoStore({ db: mongoose.connections[0].db })
+    store: new MongoStore({ url: 'mongodb://esfera:esfera@ds251277.mlab.com:51277/passpo' })
   })
 );
 app.use(passport.initialize());
