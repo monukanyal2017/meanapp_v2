@@ -2,7 +2,7 @@
   "name": "passpo_v2",
   "version": "1.0.0",
   "description": "its sociallogin app",
-  "main": "Procfile.js",
+  "main": "app.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.1",
@@ -32,7 +32,6 @@
     "serve-favicon": "^2.4.0",
     "socket.io": "^2.0.4"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -45,8 +44,7 @@
   ],
   "author": "monu kanyal",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/monukanyal/passpo_v2/issues"
-  },
-  "homepage": "https://github.com/monukanyal/passpo_v2#readme"
+ "engines": {
+    "node": "6.0.0"
+  }
 }
