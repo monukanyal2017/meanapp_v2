@@ -100,7 +100,7 @@ var hostname = require('os');
 passport.use(new GoogleStrategy({
     clientID: "859074425212-eqri6b6ftrqieb02go89k819gajrp9d7.apps.googleusercontent.com",
     clientSecret: "vfBjj4VLh-YEhjDq12c9Pnyj",
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: "https://desolate-headland-98019.herokuapp.com/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
 
