@@ -35,9 +35,6 @@
     "serve-favicon": "^2.4.0",
     "socket.io": "^2.0.4"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/monukanyal/passpo_v2.git"
