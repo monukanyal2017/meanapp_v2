@@ -167,7 +167,7 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 
 /*------routes Define---------------------*/
 const routes = require('./routes/index.js');
-const Users = require('./routes/User.js');
+const Users = require('./routes/user.js');
 const Book = require('./routes/Book.js');
 
 app.use('/', routes);
