@@ -137,12 +137,32 @@ passport.use(new FacebookStrategy({
     clientID: "1577219845726179",
     clientSecret: "e85a6c092d15cfb3249d1a8945411006",
     callbackURL: "https://young-lowlands-73461.herokuapp.com/auth/facebook/callback",
-     profileFields: ['id', 'emails', 'name']
+    profileFields: ['id', 'emails', 'name']
   },
   function(accessToken, refreshToken, profile, done) {
    
-      console.log(profile);
-  }
+       var query=User.findOne({ email:profile.emails[0].value });
+     query.exec().then((userdata)=>{
+      if (!userdata) {
+          var newUser=new User();
+          newUser.Name=profile.displayName;
+          newUser.email=profile.name.givenName;
+          newUser.password='';
+          newUser.logintype='fb';
+          newUser.save().then((results)=>{
+              return done(null, results);
+          }).catch((err)=>{
+            res.status(400).json({ error: err });
+          });
+      }
+      else
+      {
+        return done(null, userdata);
+      }
+       
+  }).catch((err)=>{
+      return done(null,null);
+  });
 ));
 
 // you can use this section to keep a smaller payload
