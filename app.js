@@ -100,7 +100,7 @@ passport.use(new LocalStrategy({
 passport.use(new GoogleStrategy({
     clientID: "859074425212-eqri6b6ftrqieb02go89k819gajrp9d7.apps.googleusercontent.com",
     clientSecret: "vfBjj4VLh-YEhjDq12c9Pnyj",
-    callbackURL: "https://desolate-headland-98019.herokuapp.com/auth/google/callback"
+    callbackURL: "https://fast-beyond-87650.herokuapp.com/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
 
