@@ -25,10 +25,14 @@ router.get('/auth/google',
   passport.authenticate('google', { scope: ['profile','email'] }));
 
 router.get('/auth/google/callback', 
-  passport.authenticate('google', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Please provide correct username and password!!',successFlash: 'Welcome!'  }),
+  passport.authenticate('google', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Something is wrong!',successFlash: 'Welcome!'  }),
   function(req, res) {
     res.redirect('/dashboard');
   });
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback',passport.authenticate('facebook', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Something is wrong',successFlash: 'Welcome!'  }));
+
 
 router.get('/profile', ensureLoggedIn, function(req, res, next) {
     User.find({_id:req.session.passport.user._id}).exec(function(err,results){

@@ -130,6 +130,20 @@ passport.use(new GoogleStrategy({
 
 ));
 
+
+FacebookStrategy = require('passport-facebook').Strategy;
+
+passport.use(new FacebookStrategy({
+    clientID: "1577219845726179",
+    clientSecret: "e85a6c092d15cfb3249d1a8945411006",
+    callbackURL: "https://young-lowlands-73461.herokuapp.com/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+   
+      console.log(profile);
+  }
+));
+
 // you can use this section to keep a smaller payload
 passport.serializeUser(function(user, done) {
   done(null, user);
