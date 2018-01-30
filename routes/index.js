@@ -21,7 +21,14 @@ router.get('/logout', ensureLoggedIn, function(req, res, next) {
     res.redirect('/');
 }); 
 
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile','email'] }));
 
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Please provide correct username and password!!',successFlash: 'Welcome!'  }),
+  function(req, res) {
+    res.redirect('/dashboard');
+  });
 
 router.get('/profile', ensureLoggedIn, function(req, res, next) {
     User.find({_id:req.session.passport.user._id}).exec(function(err,results){
@@ -63,46 +70,6 @@ router.post('/apilogin',function(req,res){
     
 });
 
-/*
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
 
-router.get('/login', passport.authenticate('local', {
-  clientID: env.AUTH0_CLIENT_ID,
-  domain: env.AUTH0_DOMAIN,
-  redirectUri: env.AUTH0_CALLBACK_URL,
-  responseType: 'code',
-  audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
-  scope: 'openid profile'}),
-  function(req, res) {
-    res.redirect("/");
-});
-
-router.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-});
-
-router.get('/callback',
-  passport.authenticate('auth0', {
-    failureRedirect: '/failure'
-  }),
-  function(req, res) {
-    res.redirect(req.session.returnTo || '/user');
-  }
-);
-
-router.get('/failure', function(req, res) {
-  var error = req.flash("error");
-  var error_description = req.flash("error_description");
-  req.logout();
-  res.render('failure', {
-    error: error[0],
-    error_description: error_description[0],
-  });
-});
-
-*/
 
 module.exports = router;
