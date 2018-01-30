@@ -166,9 +166,9 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 //app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 /*------routes Define---------------------*/
-const routes = require('../routes/index');
-const Users = require('../routes/User');
-const Book = require('../routes/Book');
+const routes = require('./routes/index,js');
+const Users = require('./routes/User.js');
+const Book = require('./routes/Book.js');
 
 app.use('/', routes);
 app.use('/dashboard', Users);
