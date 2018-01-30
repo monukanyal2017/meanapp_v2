@@ -38,7 +38,9 @@ var passport = require('passport')
 //const Auth0Strategy = require('passport-auth0');
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn('/');
 
-mongoose.connect('mongodb://localhost/esferasoft', { useMongoClient: true });
+//mongoose.connect('mongodb://localhost/esferasoft', { useMongoClient: true }); //locally
+mongoose.connect('mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft', { useMongoClient: true }); //live
+
 mongoose.Promise = global.Promise;
 /*---------passport-----------*/
 passport.use(new LocalStrategy({
@@ -92,6 +94,43 @@ passport.use(new LocalStrategy({
 
   }
 ));*/
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+passport.use(new GoogleStrategy({
+    clientID: "859074425212-eqri6b6ftrqieb02go89k819gajrp9d7.apps.googleusercontent.com",
+    clientSecret: "vfBjj4VLh-YEhjDq12c9Pnyj",
+    callbackURL: "http://localhost:3000/auth/google/callback"
+  },
+  function(token, tokenSecret, profile, done) {
+    //console.log(profile);
+     var query=User.findOne({ email:profile.emails[0].value });
+     query.exec().then((userdata)=>{
+         if (!userdata) {
+            
+            var newUser=new User();
+            newUser.email=profile.emails[0].value;
+            newUser.Name=profile.displayName;
+            newUser.password='';
+            newUser.logintype='fb';
+            newUser.save().then((results)=>{
+              console.log('google save results----');
+              console.log(results);
+              return done(null, results);
+            }).catch((err)=>{
+              res.status(400).json({ error: err });
+            });
+         
+        }
+        return done(null, userdata);
+
+     }).catch((err)=>{
+
+      res.status(400).json({ error: err });
+
+     });     
+      
+  }
+));
 
 // you can use this section to keep a smaller payload
 passport.serializeUser(function(user, done) {

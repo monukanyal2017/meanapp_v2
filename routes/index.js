@@ -14,13 +14,19 @@ router.get('/', function (req, res) {
 });
 
 router.post('/login',passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Please provide correct username and password!!',successFlash: 'Welcome!'  }));
-
 router.get('/logout', ensureLoggedIn, function(req, res, next) {
     req.session.destroy();
     //res.json({ status: 'done' });
     res.redirect('/');
 }); 
 
+
+router.get('/auth/google',passport.authenticate('google', { scope: ['profile','email'] }));
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Something is wrong,please try again later',successFlash: 'Welcome!' }),
+  function(req, res) {
+    res.redirect('/dashboard');
+  });
 
 
 router.get('/profile', ensureLoggedIn, function(req, res, next) {
@@ -36,8 +42,9 @@ router.get('/profile', ensureLoggedIn, function(req, res, next) {
   });
 }); 
 
-//for api
+//api 1- will return token 
 router.post('/apilogin',function(req,res){
+  //console.log(req.header);
      var query=User.findOne({ email:req.body.username,password:md5(req.body.password) });
      query.exec().then((userdata)=>{
       if (!userdata) {
@@ -62,6 +69,8 @@ router.post('/apilogin',function(req,res){
      });
     
 });
+
+
 
 /*
 router.get('/', function(req, res, next) {
