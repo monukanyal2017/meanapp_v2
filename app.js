@@ -156,7 +156,7 @@ app.use(
     secret: 'shhhhhhhhh',
     resave: true,
     saveUninitialized: true,
-    store: new mongoStore({ db: mongoose.connections[0].db })
+    store: new MongoStore({ db: mongoose.connections[0].db })
   })
 );
 app.use(passport.initialize());
