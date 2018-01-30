@@ -30,8 +30,8 @@ router.get('/auth/google/callback',
     res.redirect('/dashboard');
   });
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
-app.get('/auth/facebook/callback',passport.authenticate('facebook', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Something is wrong',successFlash: 'Welcome!'  }));
+router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email','public_profile' }));
+router.get('/auth/facebook/callback',passport.authenticate('facebook', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Something is wrong',successFlash: 'Welcome!'  }));
 
 
 router.get('/profile', ensureLoggedIn, function(req, res, next) {
