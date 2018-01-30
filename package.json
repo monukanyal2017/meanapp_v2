@@ -1,7 +1,7 @@
 {
   "name": "Monuapp",
   "version": "1.0.0",
-  "description": "passport js + NodeJS Regular WebApp",
+  "description": "passport js NodeJS Regular WebApp",
   "author": "monukanyal",
   "license": "MIT",
   "scripts": {
