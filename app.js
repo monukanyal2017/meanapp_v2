@@ -96,8 +96,7 @@ passport.use(new LocalStrategy({
 
   }
 ));*/
-var hostname = require('os');
-//console.log(hostname);
+
 passport.use(new GoogleStrategy({
     clientID: "859074425212-eqri6b6ftrqieb02go89k819gajrp9d7.apps.googleusercontent.com",
     clientSecret: "vfBjj4VLh-YEhjDq12c9Pnyj",
@@ -167,9 +166,9 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 //app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 /*------routes Define---------------------*/
-const routes = require('./routes/index');
-const Users = require('./routes/User');
-const Book = require('./routes/Book');
+const routes = require('/routes/index');
+const Users = require('/routes/User');
+const Book = require('/routes/Book');
 
 app.use('/', routes);
 app.use('/dashboard', Users);
