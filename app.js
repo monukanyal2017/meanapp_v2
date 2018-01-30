@@ -5,6 +5,7 @@ const md5=require('md5');
 var morgan = require('morgan'); //http request logger
 const flash = require('connect-flash');
 var mongoose=require('mongoose');
+
 /*---------------------------
 
 var mongodb = require('mongodb');
@@ -37,12 +38,12 @@ var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn('/');
 
 //mongoose.connect('mongodb://localhost/esferasoft', { useMongoClient: true }); //locally
 mongoose.connect('mongodb://esfera:esfera@ds251277.mlab.com:51277/passpo', { useMongoClient: true });  //live
 mongoose.Promise = global.Promise;
+const MongoStore = require('connect-mongo')(session);
 /*---------passport-----------*/
 passport.use(new LocalStrategy({
     // by default, local strategy uses username and password, we will override with email
@@ -154,7 +155,8 @@ app.use(
   session({
     secret: 'shhhhhhhhh',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new mongoStore({ db: mongoose.connections[0].db })
   })
 );
 app.use(passport.initialize());
