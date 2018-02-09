@@ -100,7 +100,8 @@ passport.use(new LocalStrategy({
 passport.use(new GoogleStrategy({
     clientID: "859074425212-eqri6b6ftrqieb02go89k819gajrp9d7.apps.googleusercontent.com",
     clientSecret: "vfBjj4VLh-YEhjDq12c9Pnyj",
-    callbackURL: "https://young-lowlands-73461.herokuapp.com/auth/google/callback"
+    //callbackURL: "https://young-lowlands-73461.herokuapp.com/auth/google/callback"
+    callbackURL: "http://localhost:8080/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
 
@@ -194,7 +195,8 @@ app.use(
     secret: 'shhhhhhhhh',
     resave: true,
     saveUninitialized: true,
-    store: new MongoStore({ url: 'mongodb://esfera:esfera@ds251277.mlab.com:51277/passpo' })
+    store: new MongoStore({ url: 'mongodb://esfera:esfera@ds251277.mlab.com:51277/passpo' }),
+     ttl: 1 * 24 * 60 * 60 
   })
 );
 app.use(passport.initialize());

@@ -1,11 +1,20 @@
+#body{
+  background: linear-gradient(135deg, #ea4c4c 0%, #fbca05 100%);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 560px;
+  }
 .custom_overview{
-    background-color: #222;
+    background-color: #008cbd;
+   /* background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);*/
     color: #fff;
-    margin-bottom: 20px;
+    height:100px;
+   
 }
 .custom_overview p{
     margin-bottom: 0px;
-    margin-top: 5px;
+    /*margin-top: 5px;*/
     color: #868383;
 }
 .custom_overview h2{
@@ -80,3 +89,4 @@ border-radius: 4px;
     -moz-border-radius:75px;
     margin: 0 auto;
 }
+/* player styles start*/
