@@ -13,7 +13,7 @@ var url ="mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft"; */
 router.get('/', ensureLoggedIn, function(req, res, next) 
 {
 	//console.log('session email:'+req.session.passport.user.Name);
-    var arr="[{ title: 'Rave Digger',file: 'rave_digger',howl: null},{title: '80s Vibe',file: '80s_vibe',howl: null},{title: 'Happy Forever Alone Day',file: 'Happy Forever Alone Day (Forever Alone Song)',howl: null},{title:'In The End',file:'In The End _Official Video_ - Linkin Park',howl:null},{title:'Swag Se Swagat Song',file:'Swag Se Swagat Song',howl:null}]";
+    var arr="[{title: 'Happy Forever Alone Day',file: 'Happy Forever Alone Day (Forever Alone Song)',howl: null},{title:'In The End',file:'In The End _Official Video_ - Linkin Park',howl:null},{title:'Swag Se Swagat Song',file:'Swag Se Swagat Song',howl:null}]";
 
 	res.render('dashboard'	,{message:req.flash('success'),Name:req.session.passport.user.Name,playerlist:arr});
 });
