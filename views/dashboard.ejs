@@ -53,16 +53,33 @@
 </div>
 
 	<div class="" id='body'>
-		<div class="col-md-4">
-			<iframe style="width:100%;border:0;overflow:hidden;height:455px" scrolling="no" src="https://break.tv/widget/search/"></iframe>
-
+    <div id="preloader"></div>
+		<div class="col-md-8">
+	
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            
+                <div class="input-group">
+                  <input type="text" class="form-control searchterm" placeholder="Search" value="salman khan song">
+                  <div class="input-group-btn">
+                    <button class="btn btn-primary searchbtn" type="button">
+                      <i class="glyphicon glyphicon-search">Search</i>
+                    </button>
+                  </div>
+                </div>
+            
+          </div>
+          <div class="panel-body">
+          
+              <div class="row datashow">
+                <div class="col-md-12">
+                <p style="color:green">Search now on youtube</p>
+               </div>
+                </div>  
+          </div>
+        </div>
 		</div>
-		<div class="col-md-2">
-			
-		</div>
-		<div class="col-md-2">
-			
-		</div>
+	
 		<div class="col-md-4" style="margin-top: 6%;">
 			 <!-- Top Info -->
 			  <div id="title">
@@ -101,17 +118,49 @@
 			    <div id="sliderBtn"></div>
 			  </div>
 		</div>
-		
-
-		
-
 </div>
 
 </body>
 <script src="static/howler.core.js"></script>
 <script src="static/siriwave.js"></script>
 <script type="text/javascript">
-// Cache references to DOM elements.
+  $(window).load(function(){
+    //$('.searchbtn').click();
+    $('#preloader').fadeOut('slow');
+    //$('#preloader').fadeOut('slow',function(){$(this).remove();});
+  });
+
+  $('.searchbtn').click(function(){
+     
+      var searchterm=$.trim($('.searchterm').val());
+       $("#preloader").fadeIn();
+       $.post("/dashboard/search",
+    {
+        query: searchterm
+    },
+    function(data, status){
+         $('#preloader').fadeOut('slow');
+        // $('#preloader').fadeOut('slow',function(){$(this).remove();});
+            var results=data.data;
+            //console.log(results);
+            for (var property in results) {
+              if(property==0)
+              {
+
+
+                   $('.datashow').html('<div class="col-md-3"><div class="thumbnail"><a target="_blank" href="http://api.youtube6download.top/fetch/link.php?i='+results[property]['id']+'" style="text-decoration:none;color:#03a730;"><strong>Download MP3</strong></a><img src="'+results[property]['thumbnails']['default']['url']+'" alt="Lights" style="width:100%;height:100px"><div class="caption"><p>'+results[property]['title']+'</p></div></a></div></div>');
+            
+              }
+              else
+              {
+                $('.datashow').append('<div class="col-md-3"><div class="thumbnail"><a target="_blank" href="http://api.youtube6download.top/fetch/link.php?i='+results[property]['id']+'" style="text-decoration:none;color:#03a730;"><strong>Download MP3</strong></a><img src="'+results[property]['thumbnails']['default']['url']+'" alt="Lights" style="width:100%;height:100px"><div class="caption"><p>'+results[property]['title']+'</p></div></a></div></div>');
+                
+              }
+            }
+            
+    });
+  });
+ // Cache references to DOM elements.
 var elms = ['track', 'timer', 'duration', 'playBtn', 'pauseBtn', 'prevBtn', 'nextBtn', 'playlistBtn', 'volumeBtn', 'progress', 'bar', 'wave', 'loading', 'playlist', 'list', 'volume', 'barEmpty', 'barFull', 'sliderBtn'];
 elms.forEach(function(elm) {
   window[elm] = document.getElementById(elm);
@@ -127,13 +176,16 @@ var Player = function(playlist) {
   this.index = 0;
 
   // Display the title of the first track.
-  track.innerHTML = '1. ' + playlist[0].title;
+ // track.innerHTML = '1. ' + playlist[0].title;
+  var x=playlist[0].title;
+ track.innerHTML = '1. ' + x.split(' ').slice(0,4).join(' ');
 
   // Setup the playlist display.
   playlist.forEach(function(song) {
     var div = document.createElement('div');
     div.className = 'list-song';
-    div.innerHTML = song.title;
+    var x=song.title;
+    div.innerHTML =x.split(' ').slice(0,4).join(' ');
     div.onclick = function() {
       player.skipTo(playlist.indexOf(song));
     };
@@ -159,7 +211,8 @@ Player.prototype = {
     } else {
       sound = data.howl = new Howl({
         //src: ['static/audio/' + data.file + '.webm', 'static/audio/' + data.file + '.mp3'],
-        src: [ 'static/audio/' + data.file + '.mp3'],
+       // src: [ 'static/audio/' + data.file + '.mp3'],
+        src: [ 'static/audio/' + data.file],
         html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
         onplay: function() {
           // Display the duration.
@@ -202,8 +255,9 @@ Player.prototype = {
     sound.play();
 
     // Update the track display.
-    track.innerHTML = (index + 1) + '. ' + data.title;
-
+   var x= data.title;
+    //track.innerHTML = (index + 1) + '. ' + data.title;
+    track.innerHTML = (index + 1) + '. ' +x.split(' ').slice(0,4).join(' ');
     // Show the pause button.
     if (sound.state() === 'loaded') {
       playBtn.style.display = 'none';

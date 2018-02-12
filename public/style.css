@@ -1,9 +1,20 @@
+#preloader { position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overflow: visible; background: #333 url('http://files.mimoymima.com/images/loading.gif') no-repeat center center; }
+.thumbnail{
+    margin-bottom: 5px;
+}
+
+.caption{
+        font-size: 10px;
+}
+.panel.panel-default{
+    margin-top: 5px;
+}
 #body{
   background: linear-gradient(135deg, #ea4c4c 0%, #fbca05 100%);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
-  min-height: 560px;
+  min-height: 630px;
   }
 .custom_overview{
     background-color: #008cbd;

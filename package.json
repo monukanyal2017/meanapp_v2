@@ -7,6 +7,7 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "async": "^2.6.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.1",
     "chokidar": "^2.0.1",
@@ -19,12 +20,15 @@
     "ejs": "^2.5.7",
     "ejs-lint": "^0.3.0",
     "express": "^4.16.1",
+    "express-fileupload": "^0.4.0",
     "express-session": "^1.11.3",
     "jsonwebtoken": "^8.1.0",
+    "lodash": "^4.17.5",
     "md5": "^2.2.1",
     "mongodb": "2.2.33",
     "mongoose": "^4.13.9",
     "morgan": "^1.9.0",
+    "mv": "^2.1.1",
     "passport": "^0.3.0",
     "passport-auth0": "^0.6.0",
     "passport-facebook": "^2.1.1",
@@ -32,10 +36,12 @@
     "passport-google-oauth1": "^1.0.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "random-number": "0.0.9",
     "randomcolor": "^0.5.3",
     "serve-favicon": "^2.4.0",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "youtube-search": "^1.0.10"
   },
   "repository": {
     "type": "git",

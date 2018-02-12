@@ -2,9 +2,14 @@ const express = require('express');
 var app = express();
 const path = require('path');
 const md5=require('md5');
+var mv = require('mv');  //its for chokidar
 //var morgan = require('morgan'); //http request logger
 const flash = require('connect-flash');
 var mongoose=require('mongoose');
+ var chokidar = require('chokidar');
+var sysPath = require('path');
+const fileUpload = require('express-fileupload');
+var Song=require('./Models/Songs.js'); //including model
 
 /*---------------------------
 
@@ -14,7 +19,7 @@ var url ="mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft";
 
 ------------------------------*/
 
-var port =process.env.PORT || 8080;;
+var port =process.env.PORT || 8080;
 var http=require('http').Server(app);
 var io=require('socket.io')(http);
        http.listen(port);
@@ -187,6 +192,7 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'fav.png')));
+app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -216,6 +222,74 @@ app.use('/dashboard', Users);
 app.use('/books', Book);
 
 /*---------routes end---------------------*/
+
+/*--chokiii---*/
+var paths="/Users/macmini/Downloads/alldownloads"
+var j=0;
+chokidar.watch(paths, {usePolling: true,
+  interval: 100,
+  atomic:true }).on('all', function(event, file) {
+    //console.log(event+' :'+file);
+
+   if (path.extname(file) === '.mp3') {    
+      var newfile=file.replace(path.basename(file), "");
+        console.log("Mp3 path: " + newfile);
+        console.log("event: " + event);
+      
+      if(event=="add" || event =="change" || event =="addDir") 
+      {
+         
+            console.log("Mp3 basename: " + path.basename(file)) ;
+             mv(file, "./public/audio/"+path.basename(file), {clobber: false},function(err) {
+                console.log(err);
+                if(err!=null)
+                {
+                      if(err['code']=='EEXIST')
+                      {
+                        console.log('already exist file');
+                      }
+                
+               }
+               else
+                {
+                   //db update 
+                   console.log('db updating');
+                   var newSong=new Song();
+                      newSong.Title=path.basename(file);
+                      newSong.filepath=path.basename(file);
+                      newSong.Category='Normal';
+                      newSong.save().then((results)=>{
+                         console.log('db updated:'+results);
+                      }).catch((err)=>{
+                        console.log('db updated err:'+err);
+                      });
+                }
+                
+              });
+         
+               // fs.readFile(file, 'utf8', function (err, data) {
+               //      if (err) throw err;
+               //      var obj = JSON.parse(data);               
+               //      var Title=obj.title;
+               //      var mpdpath=newfile+'Manifest.mpd';
+               //        j++;
+               //        var index = queue._queue.map(function (e) { return e.title; }).indexOf(Title);
+               //          if (index === -1) 
+               //          {     
+               //              queue.push({ title: Title, path:mpdpath, metajson:obj }, 3500*j);             
+               //          }
+               //      }); 
+              
+        }
+        // else if (event == 'unlink')
+        // {     
+        //    console.log("removing MP3");
+        //      //movieService.removeData(file);
+     
+        // }
+   }
+});
+  /*---chokiii end--*/
 
 /*io.on('connection', function(socket){
 
