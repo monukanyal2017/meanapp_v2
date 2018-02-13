@@ -12,6 +12,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
 	
 </head>
 <body>
@@ -23,7 +24,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a href="#" class="navbar-brand colr_brand"><i class="fa fa-leaf" aria-hidden="true"></i>LOGO</a>
+		<a href="#" class="navbar-brand colr_brand"><i class="fa fa-leaf" aria-hidden="true"></i>MonuWebApp</a>
 			<div class="collapse navbar-collapse navHeaderCollapse">
 				<ul class="nav navbar-nav navbar-right hover_efct">
 					<li class="active custom_text"><a href="#">America/Chicago</a></li>
@@ -44,16 +45,26 @@
 <p>Dashboard</p>
 <h2>OVERVIEW</h2>
 </div>-->
-<div class="col-md-8 custom_overview">
-	<p>Dashboard</p>
-	<h2>OVERVIEW</h2>
+<div class="col-md-2 custom_overview">
+  <p style="font-size: 15px;color:black">Dashboard</p>
+  <h2>News Headlines</h2>
 </div>
-<div class="col-md-4 custom_overview">
+<div class="col-md-8 custom_overview">
+
+ <marquee direction="left" style="padding:1%;margin-top: 4%;"> 
+ <% for(var i=0; i < newsdata.length; i++) { %>
+        <strong style="padding-right: 12px;color:#ffffff;font-family: 'Roboto Slab', serif;font-size: 15px">
+          [*]-<%=newsdata[i].desc %></strong>
+         <% } %>   
+ </marquee>
+</div>
+<div class="col-md-2 custom_overview">
 	<div id="circle" style="max-height: 100px"></div>
 </div>
 
 	<div class="" id='body'>
     <div id="preloader"></div>
+    
 		<div class="col-md-8">
 	
         <div class="panel panel-default">
@@ -117,9 +128,17 @@
 			    <div id="barEmpty" class="bar"></div>
 			    <div id="sliderBtn"></div>
 			  </div>
+      
 		</div>
+    
 </div>
-
+<div class="row">
+  <% for(var i=0; i < newsdata.length; i++) {  %>
+        <div class="col-md-3">
+         <img src="<%=newsdata[i].picurl %>" class="img-responsive thumbnail"/>
+         </div>
+         <%  } %>  
+       </div>
 </body>
 <script src="static/howler.core.js"></script>
 <script src="static/siriwave.js"></script>
