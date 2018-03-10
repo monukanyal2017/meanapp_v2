@@ -1,7 +1,7 @@
 {
-  "name": "passpo_v2",
+  "name": "meanapp",
   "version": "1.0.0",
-  "description": "its sociallogin app",
+  "description": "its mean simple app",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"

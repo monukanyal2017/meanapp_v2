@@ -23,7 +23,7 @@ var url ="mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft"; */
 
 
 /* GET user dashbard. */
-router.get('/', ensureLoggedIn, function(req, res, next) 
+/*router.get('/', ensureLoggedIn, function(req, res, next) 
 {
 	 //var arr="[{title: 'Happy Forever Alone Day',file: 'Happy Forever Alone Day (Forever Alone Song)',howl: null},{title:'In The End',file:'In The End _Official Video_ - Linkin Park',howl:null},{title:'Swag Se Swagat Song',file:'Swag Se Swagat Song',howl:null}]";
 	Song.find({}).sort([['createdAt', 'descending']]).exec().then((results)=>{
@@ -80,7 +80,7 @@ router.get('/', ensureLoggedIn, function(req, res, next)
    
 
 	
-});
+}); */
 
 router.post('/search', ensureLoggedIn, function(req, res, next) 
 {

@@ -10,47 +10,48 @@ var jwt = require('jsonwebtoken');
 router.get('/', function (req, res) {
 
       //console.log('flash'+req.flash('error'));
-      res.render('login',{message:req.flash('error')});
+      res.render('index.html');
 });
 
-router.post('/login',passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Please provide correct username and password!!',successFlash: 'Welcome!'  }));
+// router.post('/login',passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Please provide correct username and password!!',successFlash: 'Welcome!'  }));
 
-router.get('/logout', ensureLoggedIn, function(req, res, next) {
-    req.session.destroy();
-    //res.json({ status: 'done' });
-    res.redirect('/');
-}); 
+// router.get('/logout', ensureLoggedIn, function(req, res, next) {
+//     req.session.destroy();
+//     //res.json({ status: 'done' });
+//     res.redirect('/');
+// }); 
 
-router.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile','email'] }));
+// router.get('/auth/google',
+//   passport.authenticate('google', { scope: ['profile','email'] }));
 
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Something is wrong!',successFlash: 'Welcome!'  }),
-  function(req, res) {
-    res.redirect('/dashboard');
-  });
+// router.get('/auth/google/callback', 
+//   passport.authenticate('google', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Something is wrong!',successFlash: 'Welcome!'  }),
+//   function(req, res) {
+//     res.redirect('/dashboard');
+//   });
 
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
-router.get('/auth/facebook/callback',passport.authenticate('facebook', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Something is wrong',successFlash: 'Welcome!'  }));
+// router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+// router.get('/auth/facebook/callback',passport.authenticate('facebook', { successRedirect: '/dashboard', failureRedirect: '/', failureFlash: 'Something is wrong',successFlash: 'Welcome!'  }));
 
 
-router.get('/profile', ensureLoggedIn, function(req, res, next) {
-    User.find({_id:req.session.passport.user._id}).exec(function(err,results){
-    if(err){
-      console.log(err);
-    }else
-    {
-      console.log(results);
-      res.render('profile',{data:results,Name:req.session.passport.user.Name})
-    }
+// router.get('/profile', ensureLoggedIn, function(req, res, next) {
+//     User.find({_id:req.session.passport.user._id}).exec(function(err,results){
+//     if(err){
+//       console.log(err);
+//     }else
+//     {
+//       console.log(results);
+//       res.render('profile',{data:results,Name:req.session.passport.user.Name})
+//     }
     
-  });
-}); 
+//   });
+// }); 
 
 //for api
 router.post('/apilogin',function(req,res){
      var query=User.findOne({ email:req.body.username,password:md5(req.body.password) });
      query.exec().then((userdata)=>{
+
       if (!userdata) {
         res.status(201).json({ auth:false,result: userdata });
       }
