@@ -45,10 +45,6 @@
     "socket.io": "^2.0.4",
     "youtube-search": "^1.0.10"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/monukanyal/passpo_v2.git"
-  },
   "keywords": [
     "passport"
   ],

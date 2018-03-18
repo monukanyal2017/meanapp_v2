@@ -9,7 +9,7 @@ var mongoose=require('mongoose');
  var chokidar = require('chokidar');
 var sysPath = require('path');
 const fileUpload = require('express-fileupload');
-var Song=require('./Models/Songs.js'); //including model
+//var Song=require('./Models/Songs.js'); //including model
 
 /*---------------------------
 
@@ -18,7 +18,12 @@ var MongoClient = mongodb.MongoClient;
 var url ="mongodb://Esfera:esfera456@ds133547.mlab.com:33547/esferasoft";
 
 ------------------------------*/
-mongoose.connect('mongodb://monu:monu@ds261138.mlab.com:61138/apidb', { useMongoClient: true });  //live
+var options = {
+  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }
+};
+mongoose.connect('mongodb://monu:monu@ds261138.mlab.com:61138/apidb', options);
+//mongoose.connect('mongodb://monu:monu@ds261138.mlab.com:61138/apidb', { useMongoClient: true });  //live
 mongoose.Promise = global.Promise;
 
 var port =process.env.PORT || 8080;
@@ -51,8 +56,10 @@ app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.engine('html',require('ejs').renderFile);
-app.use(express.static(path.join(__dirname, 'client'))); //angular app
+app.use(express.static(path.join(__dirname, 'client'))); //angular app pointed here
+
 //app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 /*------routes Define---------------------*/

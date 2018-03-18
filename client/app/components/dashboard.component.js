@@ -7,20 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var api_service_1 = require("./services/api.service");
-var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+var api_service_1 = require("../services/api.service");
+var DashboardComponent = /** @class */ (function () {
+    function DashboardComponent() {
     }
-    AppComponent = __decorate([
+    DashboardComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'my-app',
+            selector: 'dashboard',
             //template: '<h1>My First Angular App</h1>'
-            templateUrl: 'app.component.html',
+            templateUrl: 'dashboard.component.html',
             providers: [api_service_1.ApiService]
         })
-    ], AppComponent);
-    return AppComponent;
+    ], DashboardComponent);
+    return DashboardComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.DashboardComponent = DashboardComponent;
+//# sourceMappingURL=dashboard.component.js.map
